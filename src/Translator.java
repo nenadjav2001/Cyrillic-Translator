@@ -1,4 +1,6 @@
+import java.text.BreakIterator;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -6,8 +8,8 @@ public class Translator {
 
     private final Map<Character, Character> mapForChars;
     private final Map<Character , String> mapForLettersWithLengthTwo;
-    private final static String CYRILLIC_KEYS = "АБВГДЂЕЖЗИЈКЛМНОПРСТЋУФХЦЧШ";
-    private final static String LATIN_VALUES = "ABVGDĐEŽZIJKLMNOPRSTĆUFHCČŠ";
+    private final static String CYRILLIC_KEYS = "АБВГДЂЕЖЗИЈКЛМНОПРСТЋУФХЦЧШабвгдђежзијклмнопрстћуфхцчш";
+    private final static String LATIN_VALUES = "ABVGDĐEŽZIJKLMNOPRSTĆUFHCČŠabvgdđežzijklmnoprstćufhcčš";
 
 
 
@@ -50,6 +52,9 @@ public class Translator {
         mapForLettersWithLengthTwo.put('Љ' , "Lj");
         mapForLettersWithLengthTwo.put('Њ' , "Nj");
         mapForLettersWithLengthTwo.put('Џ' , "Dž");
+        mapForLettersWithLengthTwo.put('љ' , "lj");
+        mapForLettersWithLengthTwo.put('њ' , "nj");
+        mapForLettersWithLengthTwo.put('џ' , "dž");
     }
 
     //Translate the sentence from cyrillic to latin
@@ -57,7 +62,7 @@ public class Translator {
 
         char latinChar = 0;
 
-        System.out.println("Pass a sentence in cyrillic that i can translate Sir... ");
+        System.out.println("Pass a sentence in cyrillic that i can translate for you Sir... ");
         cyrillicSentence = input.nextLine();
 
         for (int i = 0; i < cyrillicSentence.length(); i++){
@@ -66,9 +71,14 @@ public class Translator {
                 mapForLettersWithLengthTwo.containsKey(cyrillicSentence.charAt(i)) ){
                 latinChar = mapForChars.get(cyrillicSentence.charAt(i));
                 translatedLatinSentence += latinChar;
-                System.out.println(translatedLatinSentence);
             }
         }
+        printTranslatedLatinSentence(translatedLatinSentence);
+    }
+    
+
+    private void printTranslatedLatinSentence(String s){
+        System.out.println("Translated Serbian Latin sentence : " + s);
     }
 
     public static void main(String[] args) {
